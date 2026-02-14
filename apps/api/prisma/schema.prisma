@@ -13,4 +13,62 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id String @default(uuid()) @id
+  username String
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+  resumes Resume[]
+}
 
+model Resume {
+  id String @default(uuid()) @id
+  summary String?
+  core_skill String[]
+  technical_skill String[]
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projects Project[]
+  works Work[]
+  education Education?
+  certifications Certification[]
+}
+
+model Project {
+  id String @default(uuid()) @id
+  title String
+  date DateTime
+  description String[]
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade) 
+}
+
+model Work {
+  id String @default(uuid()) @id
+  title String
+  company String
+  location String
+  employmentDate DateTime
+  description String
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade) 
+}
+
+model Education {
+  id String @default(uuid()) @id
+  degree String
+  major String
+  institution String
+  graduationDate DateTime
+  resumeId String @unique
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade) 
+}
+
+model Certification {
+  id String @default(uuid()) @id
+  title String
+  issuedDate DateTime
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade) 
+}
