@@ -2,12 +2,13 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { prisma } from "./utils/prisma.js";
 
-const app = new Hono();
-
-app.get("/", async (c) => {
+const app = new Hono().get("/users", async (c) => {
 	const users = await prisma.user.findMany();
 	return c.json({ users });
 });
+
+// export api specification
+export type AppType = typeof app;
 
 serve(
 	{

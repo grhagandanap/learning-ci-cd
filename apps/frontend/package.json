@@ -3,10 +3,11 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev --port 3000",
+		"dev": "pnpm with-env vite dev --port 3000",
 		"build": "vite build",
 		"preview": "vite preview",
-		"test": "vitest run"
+		"test": "vitest run",
+		"with-env": "dotenv -e ../../.env --"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.18",
@@ -18,6 +19,7 @@
 		"@tanstack/react-router-ssr-query": "^1.131.7",
 		"@tanstack/react-start": "^1.132.0",
 		"@tanstack/router-plugin": "^1.132.0",
+		"hono": "^4.11.9",
 		"lucide-react": "^0.545.0",
 		"nitro": "npm:nitro-nightly@latest",
 		"react": "^19.2.0",
