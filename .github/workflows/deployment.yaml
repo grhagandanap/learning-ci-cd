@@ -54,7 +54,7 @@ jobs:
           host: 103.217.145.178
           username: grhagandanap
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script:
+          script: |
             cd live/learning-ci-cd/
             git pull
             docker compose build
