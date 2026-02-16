@@ -4,7 +4,7 @@ import { prisma } from "./utils/prisma.js";
 
 const app = new Hono().get("/users", async (c) => {
 	const users = await prisma.user.findMany();
-	return c.json({ message: "Hello World!"});
+	return c.json({ users });
 });
 
 // export api specification
