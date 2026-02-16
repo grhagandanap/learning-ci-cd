@@ -1,12 +1,19 @@
 name: "CI/CD"
 
 on:
+  pull_request:
+    branches:
+      - main
+
   push:
     branches:
       - main
 
 jobs:
-  test:
+  pr-check:
+
+    if: github.event_name == 'pull_request'
+
     runs-on: ubuntu-latest
 
     steps:
@@ -21,3 +28,25 @@ jobs:
 
       - name: lint
         run: pnpm lint
+  
+  deploy:
+
+    if: github.event_name == 'push'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Deploy to server
+        run: echo "Deploying to server..."
