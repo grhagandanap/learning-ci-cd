@@ -49,4 +49,14 @@ jobs:
         run: pnpm lint
 
       - name: Deploy to server
-        run: echo "Deploying to server..."
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: http://103.217.145.178
+          username: grhagandanap
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script:
+            cd live/learning-ci-cd/
+            git pull
+            docker compose build
+            docker compose down
+            docker compose up -d
