@@ -51,7 +51,7 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: http://103.217.145.178
+          host: 103.217.145.178
           username: grhagandanap
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script:
