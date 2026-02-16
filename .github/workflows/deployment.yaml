@@ -10,5 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Test CI/CD"
-        run: echo "CI/CD is working!"
+      - uses: actions/checkout@v4
+      
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: lint
+        run: pnpm lint
